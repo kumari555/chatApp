@@ -1,0 +1,75 @@
+.login {
+    text-align: center;
+    margin-top: 150px;
+}
+.button {
+   display: flex;
+    justify-content: space-between;
+    margin-right: 41%;
+    margin-left: 41%; 
+}
+.Lbutton{
+  margin-top: 10px;
+}
+.register {
+    text-align: center;
+    margin-top: 100px;
+}
+.Rbutton {
+   display: flex;
+    justify-content: space-between;
+    margin-right: 42%;
+    margin-left: 42%; 
+}
+.forgotPassword {
+    text-align: center;
+    margin-top: 150px;
+}
+.resetpassword {
+    text-align: center;
+    margin-top: 150px;
+}
+.user{
+       text-align: center;
+    margin-top: 40px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+    justify-content: center;
+    margin-right: 30%;
+    width: 30%;
+}
+.list{
+   text-align: center;
+    margin-top: 40px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-left: -28%;
+    width: 30%;
+    justify-content: center;
+    height: 352px;
+}
+.chat{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 352px;
+}
+.Dbtn{
+    display: flex;
+    margin-left: 80%; 
+}
+.message{
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 30%;
+    margin-left: 30%; 
+}
+
+
+
+
+
