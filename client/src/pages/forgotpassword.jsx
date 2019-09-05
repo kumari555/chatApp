@@ -11,8 +11,8 @@ class forgotPassword extends React.Component {
         super(props)
         this.state = {
             email: "",
-            snackBarMessage: " ",
-            openSnackBar: " "
+            snackBarMessage: "",
+            openSnackBar:false
         }
     }
     handleEmailChange = (event) => {
@@ -29,10 +29,9 @@ class forgotPassword extends React.Component {
             });
         }
         else {
-            controller.forgotPassword(this.state.email)
-            this.props.history.push('/resetPassword')
+            controller.forgotPassword(this.state.email) 
         }
-        
+        this.props.history.push('/resetPassword')
     }
     handleSnackClose = () => {
         try {
@@ -43,10 +42,8 @@ class forgotPassword extends React.Component {
             console.log("error at handleSnackClose in login");
         }
     }
-
     render() {
         return (
-
             <div>
                 <form className="forgotPassword">
                     <h1>Forgotpassword Page</h1>

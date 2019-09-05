@@ -15,10 +15,9 @@ console.log(token)
             password: "",
             confirmpassword: "",
             snackBarMessage: " ",
-            openSnackBar: " "
+            openSnackBar: false
         }
     }
-
     handlepasswordChange = (event) => {
         var password = event.target.value;
         this.setState({
@@ -46,7 +45,6 @@ console.log(token)
             controller.resetPassword(this.state.password, this.state.confirmpassword)
             //this.props.history.push('/login')
         }
-
     }
     handleSnackClose = () => {
         try {

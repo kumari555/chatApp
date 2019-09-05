@@ -11,7 +11,7 @@ class Login extends React.Component {
             email: "",
             password: "",
             snackBarMessge: " ",
-            openSnackBar: " "
+            openSnackBar: false
         }
     }
     handleEmailChange = (event) => {

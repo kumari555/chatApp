@@ -4,30 +4,33 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import GetUseres from '../services/userservices';
+import GetUseres from '../controllers/controller';
 class dashboard extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            AllUseres: ""
+            AllUseres: []
         }
     }
-    componentDidMount() {
-        GetUseres()
+    componentWillMount() {
+        GetUseres.getUseres()
             .then((result) => {
-                console.log("iiiiii",result)
                 console.log("get useres data", result)
                 this.setState({
                     AllUseres: result.data
                 })
+                console.log("all user after state set", this.state.AllUseres);
+
             })
     }
     render() {
-        // const data = this.state.AllUseres.map((char) => {
-        //     return (
-        //         <div>{char.key}:{char.email}</div>
-        //     )
-        // })
+        var onlineUsers = this.state.AllUseres.map((key) => {
+            if ((key.email) !== (localStorage.getItem('senderMail'))) {
+                return (
+                    <div> {key.email}</div>
+                )
+            }
+        })
         return (
             <div>
                 <AppBar position="static">
@@ -40,7 +43,9 @@ class dashboard extends React.Component {
                 <div className="chat">
                     <Card className="user">
                         <h3> users</h3>
-                        {/* {data} */}
+                        <ul>
+                        <li>{onlineUsers}</li>
+                        </ul>
                     </Card>
                     <Card className="list" >
                         <h3> chatlist</h3>
@@ -52,11 +57,15 @@ class dashboard extends React.Component {
                         label="message"
                         margin="normal"
                         variant="outlined"
+                    // onChange={this.handlefirstnameChange}
+                    // value={this.state.firstname}
                     />
-                    <Button variant="outlined" color="primary">
-                        Send
-                          </Button>
+                    <Button variant="outlined" color="primary" >
+                        send
+                         </Button>
                 </div>
+
+
             </div>
         );
     }

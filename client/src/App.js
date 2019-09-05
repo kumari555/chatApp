@@ -4,7 +4,7 @@ import Login from './pages/login';
 import Register from './pages/register';
 import ForgotPassword from './pages/forgotpassword';
 import ResetPassword from './pages/resetpassword';
-import Dashboard from './pages/dashboard';
+import dashboard from './pages/dashboard';
 // import Search from './';
 import './App.css';
 
@@ -18,7 +18,7 @@ class App extends Component {
                     <Route path='/register' component={Register}></Route>
                     <Route path='/forgotPassword' component={ForgotPassword}></Route>
                     <Route path='/resetPassword/:token' component={ResetPassword}></Route>
-                    <Route path='/dashboard' component={Dashboard}></Route>
+                    <Route path='/dashboard' component={dashboard}></Route>
                     {/* <Route path='/search' component={Search}></Route> */}
                 </div>
             </Router>
