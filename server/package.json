@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "chatapp backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "ratnakumari",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "express-validator": "^4.2.0",
+    "nodemailer": "^6.3.0",
+    "nodemon": "^1.19.1"
+  },
+  "devDependencies": {
+    "json-web-token": "^3.1.1",
+    "jsonwebtoken": "^8.5.1"
+  }
+}
