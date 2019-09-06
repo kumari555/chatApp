@@ -12,7 +12,7 @@ class forgotPassword extends React.Component {
         this.state = {
             email: "",
             snackBarMessage: "",
-            openSnackBar:false
+            openSnackBar: false
         }
     }
     handleEmailChange = (event) => {
@@ -29,7 +29,7 @@ class forgotPassword extends React.Component {
             });
         }
         else {
-            controller.forgotPassword(this.state.email) 
+            controller.forgotPassword(this.state.email)
         }
         this.props.history.push('/resetPassword')
     }

@@ -31,7 +31,6 @@ exports.register = (req, res) => {
             "lastname": req.body.lastname,
             "email": req.body.email,
             "password": hash
-
         }
     }
     user.register(userData, (err, user) => {

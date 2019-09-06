@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import controller from '../controllers/controller';
 class Login extends React.Component {
     constructor(props) {
         super(props)
@@ -20,7 +21,6 @@ class Login extends React.Component {
             email: email
         })
     }
-
     handlepasswordChange = (event) => {
         var password = event.target.value;
         this.setState({
@@ -32,6 +32,24 @@ class Login extends React.Component {
     }
     handleforgotpassword = () => {
         this.props.history.push('/forgotPassword')
+    }
+    handledashboard = () => {
+        if (this.state.email === "") {
+            this.setState({
+                openSnackBar: true,
+                snackBarMessage: 'email is empty'
+            });
+        } else if (this.state.password === "") {
+            this.setState({
+                openSnackBar: true,
+                snackBarMessage: 'password is empty'
+            });
+        }
+        else {
+            localStorage.setItem('senderMail', this.state.email)
+            controller.login(this.state.email, this.state.password)
+            this.props.history.push('/dashboard')
+        }
     }
     handleSnackClose = () => {
         try {
@@ -57,7 +75,7 @@ class Login extends React.Component {
                             margin="normal"
                             variant="outlined"
                             onChange={this.handleEmailChange}
-                            value={this.state.email}                                            
+                            value={this.state.email}
                         />
                     </div>
                     <div>
@@ -76,7 +94,7 @@ class Login extends React.Component {
                         <Button variant="outlined" color="primary" onClick={this.handleRegister}>
                             Create
                          </Button>
-                        <Button variant="outlined" color="primary" >
+                        <Button variant="outlined" color="primary" onClick={this.handledashboard}>
                             Submit
                           </Button>
                     </div>

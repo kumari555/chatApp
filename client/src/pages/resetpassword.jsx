@@ -43,7 +43,7 @@ console.log(token)
             });
         } else {
             controller.resetPassword(this.state.password, this.state.confirmpassword)
-            //this.props.history.push('/login')
+            this.props.history.push('/login')
         }
     }
     handleSnackClose = () => {

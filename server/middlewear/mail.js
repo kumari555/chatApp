@@ -13,17 +13,19 @@
 *
 *******************************************************************************************************************/
 const nodemailer = require("nodemailer");
-// const env = require('dotenv')
+// require('dotenv')
 require('dotenv').config();
+// require('dotenv').config();
 exports.sendMail = (data, url, callback) => {
     console.log("in mailer", process.env.email)
     let transport = nodemailer.createTransport({
         service: 'gmail',
-        auth: { 
+        auth: {
             user: process.env.email,
             pass: process.env.password
         }
     });
+    console.log|(process.env.email)
     console.log("mail sender", url, data.body)
     transport.sendMail({
         from: process.env.email,

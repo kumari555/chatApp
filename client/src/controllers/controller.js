@@ -1,5 +1,6 @@
 import authServices from '../services/userservices';
 import axios from 'axios';
+import { saveusers } from '../../../server/controller/chatcontroller';
 var controller = {
     register(firstname, lastname, email, password) {
         var data = {
@@ -80,7 +81,9 @@ var controller = {
         //     return error;
         //     return error;
         // })
+    },
+    saveusers() {
+        return axios.get(authServices.saveusers)
     }
 }
-
 export default controller;

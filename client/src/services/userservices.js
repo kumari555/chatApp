@@ -3,6 +3,7 @@ var authServices = {
     login: '/login',
     forgotPassword: '/forgotPassword',
     resetPassword: '/resetPassword',
-    getUseres: '/GetUseres'
+    getUseres: '/GetUseres',
+    saveusers:'/saveusers'
 }
 export default authServices;

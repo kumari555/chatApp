@@ -16,7 +16,10 @@
 const express = require('express')
 var bodyParser = require('body-parser');
 const expressValidator = require('express-validator')
+const socketIo = require('socket.io-client')
+// const io = require('socket.io')();
 //const router = express.Router();
+require('dotenv').config()
 const routes = require('./routes/routes')
 const mongoose = require('mongoose');
 const app = express()
@@ -37,4 +40,25 @@ mongoose.connection.on("disconnected", () => {
 app.listen(4000, () => {
     console.log("app running 4000 ")
 });
+var server = app.listen(4000, () => {
+    console.log("app running in 4000")
+})
+const io = socketIo(server); // < Interesting!
+io.on('connection', (socket) => {
+    console.log("user connected")
+    socket.on('sendMessage', chatData => {
+        console.log("socket catched", chatData)
+        chatcontrollers.saveusers(chatData, (err, result) => {
 
+            if (err) {
+                console.log("error on server while receiving data");
+            } else {
+                // io.sockets.emit('emitMsg', result);
+                console.log(result)
+                // callback(null,result)
+                io.sockets.emit('upddatedMsg', result)
+            }
+           
+        })
+    })
+})
