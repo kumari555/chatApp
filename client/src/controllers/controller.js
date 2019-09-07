@@ -1,6 +1,6 @@
 import authServices from '../services/userservices';
 import axios from 'axios';
-import { saveusers } from '../../../server/controller/chatcontroller';
+
 var controller = {
     register(firstname, lastname, email, password) {
         var data = {
@@ -70,20 +70,12 @@ var controller = {
     },
     getUseres() {
         return axios.get(authServices.getUseres)
-        //     .then(response => {
-        //     console.log("response--" + JSON.stringify(response));
-        //     if (response.status === 200) {
-        //         console.log("resetpassword sucess",response.data);
-        //         return response.data;
-        //     }
-        // }).catch(error => {
-        //     console.log("resetpassword failed", error);
-        //     return error;
-        //     return error;
-        // })
     },
     saveusers() {
         return axios.get(authServices.saveusers)
+    },
+    getusers() {
+        return axios.get(authServices.getusers)
     }
 }
 export default controller;

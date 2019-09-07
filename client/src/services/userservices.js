@@ -4,6 +4,7 @@ var authServices = {
     forgotPassword: '/forgotPassword',
     resetPassword: '/resetPassword',
     getUseres: '/GetUseres',
-    saveusers:'/saveusers'
+    saveusers: '/saveusers',
+    getusers:'/getusers'
 }
 export default authServices;

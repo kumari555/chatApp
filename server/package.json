@@ -16,8 +16,7 @@
     "express-validator": "^4.2.0",
     "nodemailer": "^6.3.0",
     "nodemon": "^1.19.1",
-    "socket.io-client": "^2.2.0",
-    "socket.io-react": "^1.2.0"
+    "socket.io": "^2.2.0"
   },
   "devDependencies": {
     "json-web-token": "^3.1.1",

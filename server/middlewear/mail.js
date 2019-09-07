@@ -25,7 +25,7 @@ exports.sendMail = (data, url, callback) => {
             pass: process.env.password
         }
     });
-    console.log|(process.env.email)
+    console.log (process.env.email)
     console.log("mail sender", url, data.body)
     transport.sendMail({
         from: process.env.email,

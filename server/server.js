@@ -16,12 +16,13 @@
 const express = require('express')
 var bodyParser = require('body-parser');
 const expressValidator = require('express-validator')
-const socketIo = require('socket.io-client')
-// const io = require('socket.io')();
+ const socketIo = require('socket.io')
+//const io = require('socket.io')();
 //const router = express.Router();
 require('dotenv').config()
 const routes = require('./routes/routes')
 const mongoose = require('mongoose');
+const chatcontrollers = require('../server/controller/chatcontroller');
 const app = express()
 app.use(bodyParser.json());
 app.use(expressValidator())
@@ -34,12 +35,12 @@ mongoose.connection.on("connected", () => {
     console.log("Successfully connected to the database");
 })
 mongoose.connection.on("disconnected", () => {
-    console.log('Could not connect to the database ');
+    console.log('Could not connect to the database');
     process.exit();
 })
-app.listen(4000, () => {
-    console.log("app running 4000 ")
-});
+// app.listen(4000, () => {
+//     console.log("app running 4000 ")
+// });
 var server = app.listen(4000, () => {
     console.log("app running in 4000")
 })
@@ -49,7 +50,6 @@ io.on('connection', (socket) => {
     socket.on('sendMessage', chatData => {
         console.log("socket catched", chatData)
         chatcontrollers.saveusers(chatData, (err, result) => {
-
             if (err) {
                 console.log("error on server while receiving data");
             } else {
@@ -58,7 +58,8 @@ io.on('connection', (socket) => {
                 // callback(null,result)
                 io.sockets.emit('upddatedMsg', result)
             }
-           
+
         })
     })
 })
+  
