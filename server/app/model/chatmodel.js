@@ -18,7 +18,25 @@ const Schema = mongoose.Schema({
 
     });
 const user = mongoose.model('chat', Schema);
-exports.getusers = (data, callback) => {
+exports.saveMsg = (data, callback) => {
+    // console.log(data);
+    // console.log("fffdfgd")
+    console.log(data)
+    var details = new user({
+        "sender": data.sender,
+        "receiver": data.receiver,
+        "message": data.message
+    })
+    details.save((err, data) => {
+        console.log("in model data", data)
+        if (data.length <= 0 || err) {
+            callback("no data found")
+        } else {
+            callback(null, data)
+        }
+    })
+}
+exports.getMsg = (data, callback) => {
     //console.log("data",data)
     user.find({}, (err, data) => {
         console.log("model", data)
@@ -31,20 +49,3 @@ exports.getusers = (data, callback) => {
 }
 
 
-exports.saveusers = (data, callback) => {
-    // console.log(data);
-    // console.log("fffdfgd")
-    var details = new user({
-        "sender": data.body.sender,
-        "receiver": data.body.receiver,
-        "message": data.body.message
-    })
-    details.save((err, data) => {
-        console.log("in model data", data)
-        if (data.length <= 0 || err) {
-            callback("no data found")
-        } else {
-            callback(null, data)
-        }
-    })
-}

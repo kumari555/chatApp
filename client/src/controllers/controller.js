@@ -71,11 +71,11 @@ var controller = {
     getUseres() {
         return axios.get(authServices.getUseres)
     },
-    saveusers() {
-        return axios.get(authServices.saveusers)
+    saveMsg() {
+        return axios.get(authServices.saveMsg)
     },
-    getusers() {
-        return axios.get(authServices.getusers)
+    getMsg() {
+        return axios.get(authServices.getMsg)
     }
 }
 export default controller;

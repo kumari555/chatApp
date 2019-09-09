@@ -47,9 +47,9 @@ var server = app.listen(4000, () => {
 const io = socketIo(server); // < Interesting!
 io.on('connection', (socket) => {
     console.log("user connected")
-    socket.on('sendMessage', chatData => {
-        console.log("socket catched", chatData)
-        chatcontrollers.saveusers(chatData, (err, result) => {
+    socket.on('sendMessage', Data => {
+        console.log("socket catched",Data)
+        chatcontrollers.saveMsg(Data, (err, result) => {
             if (err) {
                 console.log("error on server while receiving data");
             } else {
