@@ -48,7 +48,6 @@ class Login extends React.Component {
         }
         else {
             localStorage.setItem('senderMail', this.state.email)
-            
             controller.login(this.state.email, this.state.password)
             this.props.history.push('/dashboard')
         }

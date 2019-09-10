@@ -42,7 +42,7 @@
     flex-direction: column;
 }
 .list{
-   
+    text-align: left;
     margin-top: 40px;
     display: -ms-flexbox;
     display: flex;
@@ -70,8 +70,10 @@
     margin-right: 30%;
     margin-left: 30%; 
 }
-
-
+.ReceiverSide{
+    text-align: center;
+   
+}
 
 
 

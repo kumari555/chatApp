@@ -1,12 +1,12 @@
 var modeldata = require('../app/model/chatmodel')
-exports.saveMsg = (data, callback) => {
-    //console.log("data in services", data.body)
-    modeldata.saveMsg(data, (err, data) => {
+exports.saveMsg = (req, callback) => {
+    //console.log("data in services", req.body.sender)
+    modeldata.saveMsg(req, (err, data) => {
         if (err) {
             console.log("error", err);
-            callback(err);
+           return callback(err);
         } else
-            callback(null, data);
+           return callback(null, data);
     });
 }
 

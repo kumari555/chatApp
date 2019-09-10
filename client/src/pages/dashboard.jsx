@@ -5,7 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import GetUseres from '../controllers/controller';
-import saveMsg from '../controllers/controller';
+//import saveMsg from '../controllers/controller';
 import getMsg from '../controllers/controller';
 const socketIo = require('socket.io-client');
 const socket = socketIo();
@@ -18,53 +18,44 @@ class dashboard extends React.Component {
         this.state = {
             AllUseres: [],
             message: [],
-            msgdis: [],
-            updatemsg: [],
-            Receiver: '',
-            Sender: '',
+            email: '',
             msg: '',
-            msgHistory: [],
-            single: []
+            Sender: '',
+            Receiver: '',
+            msgDisplay: ''
         }
     }
     componentDidMount() {
-        GetUseres.getUseres()
+        GetUseres.GetUseres()
             .then((result) => {
-                console.log("get useres data", result)
                 this.setState({
-                    AllUseres: result.data
+                    AllUseres: result
                 })
-                console.log("all user after state set", this.state.AllUseres);
-            })
-        saveMsg.saveMsg()
-            .then((results) => {
-                console.log("single", results)
-                this.setState({
-                    single: results.data
-                })
-                console.log("all messages-------", results);
+                console.log("result-------", result);
             }).catch((err) => {
                 console.log("errrr", err);
             })
         getMsg.getMsg()
             .then((results) => {
-                console.log("in dash", results)
                 this.setState({
-                    message: results.data
+                    message: results
                 })
                 console.log("all messages-------", results);
             }).catch((err) => {
                 console.log("errrr", err);
             })
-        socket.on('upddatedMsg', ((res) => {
-            const msgHistory = this.state.msgHistory;
-            console.log('res--------', res);
-            msgHistory.push(res);
-            console.log('message===>', msgHistory);
-            // this.setState({
-            //     msgHistory: msgHistory
-            // })
-        }))
+        socket.on('Message', (result) => {
+            const message = this.state.message;
+            message.push(result);
+            this.setState({ message: message });
+        })
+    }
+    handleMessage = (e) => {
+        var msg = e.target.value;
+        console.log("msg-----------", msg);
+        this.setState({
+            msg: msg
+        })
     }
     handlelogin = () => {
         this.props.history.push('/login')
@@ -75,75 +66,47 @@ class dashboard extends React.Component {
             Receiver: r
         })
     }
-    handlelist = (e) => {
-        var send = e.target.value;
+    handleSend = () => {
+        var Sender = localStorage.getItem('senderMail');
         this.setState({
-            sender: send
-        })
-    }
-    handleMessage = (event) => {
-        var message = event.target.value;
-        console.log(message)
-        this.setState({
-            msg: message
+            Sender: Sender
         })
         var data = {
-            "sender": localStorage.getItem('senderMail'),
-            "receiver": this.state.Receiver,
-            "message": this.state.msg
+            sender: Sender,
+            receiver: this.state.Receiver,
+            message: this.state.msg
         }
-       console.log("data-------", data)
-        socket.emit("sendMessage", data)
-       
-
+        console.log('---------------', data)
+        socket.emit('sendMessage', data);
+        this.setState({
+            msg: '',
+            anchorEl: null
+        })
     }
     render() {
-        const update = this.state.message.map((key) => {
-            return (
-                <div>
-                    {key.sender === localStorage.getItem('senderMail') ? (
-                        key.sender === this.state.receiver ?
-                            (
-                                <div className="sender-div">
-                                    <label>{key.sender}:</label>
-                                    <div>{key.message}</div>
-                                </div>) : (null)
-                    ) : (null)}
-                    {key.sender === this.state.select ? (
-                        <div className="receiver=div">
-                            <label>{key.receiver}:</label>
-                            <div>{key.message}</div>
-                        </div>) : (null)
-                    }
-                </div>
-            )
-        })
         var onlineUsers = this.state.AllUseres.map((key) => {
-            // console.log("in dashboard",key)
             if ((key.email) !== (localStorage.getItem('senderMail'))) {
                 return (
                     <div> <MenuItem onClick={this.handleMenu}>{key.email}</MenuItem></div >
                 )
             }
         })
-        const msgdis = this.state.message.map((key) => {
-            // console.log("message hjhjhjh", key.message)
+        var msgdis = this.state.message.map((key) => {
+            const s = localStorage.getItem('senderMail');
             return (
                 <div>
-                    {key.sender === this.state.sender ?
-                        (<div className="sender=div">
-                            <label>{key.sender}:</label>
-                            <div>{key.message}</div>
-                        </div>)
-                        : (<div className="receiver=div">
-                            <label>{key.sender}:</label>
-                            <div>{key.message}</div>
-                        </div>)
+                    {
+                        key.sender === s ?
+                            (<div className="ReceiverSide">
+                                <div>{key.message}</div>
+                            </div>)
+                            : <div className='SenderSide'>
+                                <div> {key.message}</div>
+                            </div>
                     }
                 </div>
             )
         })
-        
         return (
             <div>
                 <AppBar position="static">
@@ -165,9 +128,11 @@ class dashboard extends React.Component {
                     </Card>
                     <Card className="list" >
                         <h4>To:  {localStorage.getItem('senderMail')}</h4>
-                        <li>
-                            {update}{msgdis}</li>
-                        
+                        <div>
+                            <li>
+                                {msgdis}</li>
+                        </div>
+
                     </Card>
                 </div>
                 <div className="message">
@@ -176,15 +141,16 @@ class dashboard extends React.Component {
                         label="message"
                         margin="normal"
                         variant="outlined"
-                        onChange={(event) => { this.handleMessage(event) }}
+                        onChange={this.handleMessage}
                         value={this.state.msg}
                     />
-                    <Button variant="outlined" color="primary" onClick={(e) => this.handlelist(e)} >
+                    <Button variant="outlined" color="primary" onClick={(e) => this.handleSend(e)} >
                         send
              </Button>
                 </div>
             </div>
         );
+
     }
 }
 export default dashboard;

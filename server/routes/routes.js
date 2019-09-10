@@ -15,7 +15,7 @@ router.post('/login', controller.login);
 router.post('/forgotPassword', controller.forgotPassword);
 router.get('/resetPassword/:token', auth.verify, controller.resetPassword);
 router.get('/GetUseres', controller.GetUseres);
-router.post('/saveMsg', controllers.saveMsg)
+router.post('/saveMsg', controllers.saveMsg);
 router.get('/getMsg', controllers.getMsg);
 ;
 //console.log("in")

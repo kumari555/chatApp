@@ -68,14 +68,64 @@ var controller = {
             //return error;
         })
     },
-    getUseres() {
-        return axios.get(authServices.getUseres)
-    },
-    saveMsg() {
-        return axios.get(authServices.saveMsg)
+    GetUseres() {  
+        return axios.get(authServices.GetUseres).then(response => {
+            console.log("response----------->>>>>>>>>>>>", response.data);
+            if (response.status === 200) {
+                console.log("get all useres sucess");
+                return response.data;
+            }
+        })
+            // return data;
+            .catch(error => {
+                console.log("get all useres failed", error);
+                //return error;
+            })
     },
     getMsg() {
-        return axios.get(authServices.getMsg)
+        return axios.get(authServices.getMsg).then(response => {
+            console.log("all chats------", response.data);
+            if (response.status === 200) {
+                console.log("get all chats sucess");
+                return response.data;
+            }
+        })
+            // return data;
+            .catch(error => {
+                console.log(" get all chats failed", error);
+                //return error;
+            })
     }
 }
 export default controller;
+    // saveMsg(sender, receiver, message) {
+    //     var data = {
+    //         sender: sender,
+    //         receiver: receiver,
+    //         message: message
+    //     }
+    //     console.log ("frontend controller", data)
+    //     return axios.post(authServices.saveMsg, data)
+        //     console.log("response--" + JSON.stringify(response));
+        //     if (response.status === 200) {
+        //         console.log(" sucess")
+        //         return response
+        //     }
+        // }).catch(error => {
+        //     console.log(" failed", error);
+        //     return error;
+        // })
+    // },
+    // getMsg() {
+    //     return axios.get(authServices.getMsg)
+        //     console.log("response--" + JSON.stringify(response));
+        //     if (response.status === 200) {
+        //         console.log(" sucess")
+        //     }
+        // }).catch(error => {
+        //     console.log(" failed", error);
+        //     return error;
+        // })
+    // },
+    
+

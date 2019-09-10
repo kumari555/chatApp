@@ -3,7 +3,7 @@ var authServices = {
     login: '/login',
     forgotPassword: '/forgotPassword',
     resetPassword: '/resetPassword',
-    getUseres: '/GetUseres',
+    GetUseres: '/GetUseres',
     saveMsg: '/saveMsg',
     getMsg: '/getMsg'
 }

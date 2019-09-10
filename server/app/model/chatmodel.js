@@ -19,20 +19,20 @@ const Schema = mongoose.Schema({
     });
 const user = mongoose.model('chat', Schema);
 exports.saveMsg = (data, callback) => {
-    // console.log(data);
+    // console.log("data in model===> " + data.body.sender);
     // console.log("fffdfgd")
-    console.log(data)
+    // console.log("message before sending to  database===>" + data)
     var details = new user({
         "sender": data.sender,
-        "receiver": data.receiver,
+       "receiver": data.receiver,
         "message": data.message
     })
-    details.save((err, data) => {
-        console.log("in model data", data)
+    details.save((err, result) => {
+        // console.log("in model data", data)
         if (data.length <= 0 || err) {
-            callback("no data found")
+            return callback(null, "no data found")
         } else {
-            callback(null, data)
+            return callback(null, result)
         }
     })
 }

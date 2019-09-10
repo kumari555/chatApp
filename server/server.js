@@ -16,13 +16,14 @@
 const express = require('express')
 var bodyParser = require('body-parser');
 const expressValidator = require('express-validator')
- const socketIo = require('socket.io')
+const socketIo = require('socket.io')
 //const io = require('socket.io')();
 //const router = express.Router();
 require('dotenv').config()
 const routes = require('./routes/routes')
 const mongoose = require('mongoose');
 const chatcontrollers = require('../server/controller/chatcontroller');
+//const chatservices = require('../server/services/chatservices');
 const app = express()
 app.use(bodyParser.json());
 app.use(expressValidator())
@@ -48,7 +49,7 @@ const io = socketIo(server); // < Interesting!
 io.on('connection', (socket) => {
     console.log("user connected")
     socket.on('sendMessage', Data => {
-        console.log("socket catched",Data)
+        console.log("socket catched", Data)
         chatcontrollers.saveMsg(Data, (err, result) => {
             if (err) {
                 console.log("error on server while receiving data");
@@ -56,10 +57,9 @@ io.on('connection', (socket) => {
                 // io.sockets.emit('emitMsg', result);
                 console.log(result)
                 // callback(null,result)
-                io.sockets.emit('upddatedMsg', result)
+                io.sockets.emit('Message', result)
             }
 
         })
     })
 })
-  
